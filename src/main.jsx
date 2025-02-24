@@ -8,6 +8,7 @@ import InjectiveHome from './components/Injective/InjectiveHome.jsx'
 import MultiversHome from './components/mutilvers/MultiversHome.jsx'
 import AddressesApis from './components/mutilvers/AddressesApis.jsx'
 import TxnApis from './components/mutilvers/TxnApis.jsx'
+import BlockApis from './components/mutilvers/BlockApis.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="multiverse" element={<MultiversHome />} />
           <Route path="addresses" element={<AddressesApis />} />
           <Route path="txn" element={<TxnApis />} />
+          <Route path="block" element={<BlockApis />} />
         </Route>
       </Routes>
     </BrowserRouter>

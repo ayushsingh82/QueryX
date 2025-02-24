@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FloatingImage = ({ src, className }) => (
   <motion.img
@@ -20,6 +21,7 @@ const FloatingImage = ({ src, className }) => (
 
 const Home = () => {
   const [hoveredBox, setHoveredBox] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-8 relative overflow-hidden">
@@ -119,6 +121,7 @@ const Home = () => {
                 transform transition-all duration-200 hover:bg-purple-500/10"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/injective')}
             >
               Get Started →
             </motion.button>
@@ -141,7 +144,7 @@ const Home = () => {
           <div className="relative z-10">
             <div className="flex items-center gap-4 mb-4">
               <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Multiverse
+                Multivers
               </h2>
               <img 
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
@@ -157,6 +160,7 @@ const Home = () => {
                 transform transition-all duration-200 hover:bg-blue-500/10"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/multiverse')}
             >
               Explore →
             </motion.button>

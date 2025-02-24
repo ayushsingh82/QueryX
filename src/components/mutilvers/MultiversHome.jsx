@@ -1,6 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
+const FloatingImage = ({ src, className }) => (
+  <motion.img
+    src={src}
+    className={`absolute pointer-events-none ${className}`}
+    animate={{
+      y: [0, -20, 0],
+      rotate: [0, -5, 5, 0],
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+    alt=""
+  />
+);
+
 const MultiversHome = () => {
   const [query, setQuery] = useState('');
   const [messages, setMessages] = useState([]);
@@ -15,19 +32,44 @@ const MultiversHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black p-8">
+    <div className="min-h-screen bg-black p-8 relative overflow-hidden">
+      {/* Floating Elements */}
+      <FloatingImage 
+        src="https://cdn-icons-png.flaticon.com/512/8637/8637101.png"
+        className="w-20 h-20 top-20 right-[15%] opacity-10 filter invert"
+      />
+      <FloatingImage 
+        src="https://cdn-icons-png.flaticon.com/512/2906/2906274.png"
+        className="w-16 h-16 bottom-20 left-[10%] opacity-10 filter invert"
+      />
+      <FloatingImage 
+        src="https://cdn-icons-png.flaticon.com/512/1356/1356479.png"
+        className="w-24 h-24 top-1/3 left-[20%] opacity-10 filter invert"
+      />
+
       {/* Header */}
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-8">
-          Multivers Query Tool
-        </h1>
+      <div className="max-w-6xl mx-auto relative">
+        <div className="flex items-center gap-4 mb-12">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            Multivers Query Tool
+          </h1>
+          <img 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
+            alt="MultiversX Logo"
+            className="w-12 h-12 object-contain filter brightness-200"
+          />
+        </div>
+        <p className="text-gray-400 text-xl mb-8 max-w-2xl">
+          Seamlessly query and analyze MultiversX blockchain data using natural language
+        </p>
 
         {/* Chat Container */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-black/40 border border-blue-500/20 rounded-2xl p-6 h-[600px] flex flex-col
-            shadow-[0_0_15px_rgba(59,130,246,0.15)] backdrop-blur-sm"
+          className="bg-black/40 border border-blue-500/10 rounded-2xl p-6 h-[600px] flex flex-col
+            shadow-[0_0_15px_rgba(59,130,246,0.15)] backdrop-blur-sm relative animated-border-box multivers-border
+            before:rounded-2xl overflow-hidden"
         >
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto mb-4 space-y-4">
@@ -110,3 +152,5 @@ const MultiversHome = () => {
 };
 
 export default MultiversHome;
+
+// address fo testing : erd1vtlpm6sxxvmgt43ldsrpswjrfcsudmradylpxn9jkp66ra3rkz4qruzvfw

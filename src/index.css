@@ -35,3 +35,37 @@ body {
 .floating {
   animation: float 6s ease-in-out infinite;
 }
+
+@keyframes borderBeam {
+  0%, 100% {
+    clip-path: inset(0 0 98% 0);
+  }
+  25% {
+    clip-path: inset(0 98% 0 0);
+  }
+  50% {
+    clip-path: inset(98% 0 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 0 98%);
+  }
+}
+
+.animated-border-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  animation: borderBeam 4s linear infinite;
+}
+
+.injective-border::before {
+  border-image: linear-gradient(90deg, #A855F7, #EC4899) 1;
+}
+
+.multivers-border::before {
+  border-image: linear-gradient(90deg, #60A5FA, #22D3EE) 1;
+}

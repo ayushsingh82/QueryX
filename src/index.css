@@ -1,0 +1,21 @@
+:root {
+  --primary: #2A2D3A;
+  --secondary: #1A1C24;
+  --accent: #6F4FF2;
+  --text: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--secondary);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #6F4FF2, #4F8FFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

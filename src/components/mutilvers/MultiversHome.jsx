@@ -46,47 +46,86 @@ const MultiversHome = () => {
     if (!query.trim()) return;
 
     const newMessage = { type: 'user', content: query };
-    // Add user message immediately
     setMessages(prev => [...prev, newMessage]);
 
     let responseMessage;
 
-    // Check for balance command
-    if (query.toLowerCase().startsWith('/balance ')) {
-      const address = query.split(' ')[1];
-      if (address) {
-        try {
+    try {
+      if (query.toLowerCase().startsWith('/details ')) {
+        const address = query.split(' ')[1];
+        if (address) {
+          const response = await fetch(`https://gateway.multiversx.com/address/${address}`);
+          const data = await response.json();
+          responseMessage = {
+            type: 'system',
+            content: `Address Details:\n${JSON.stringify(data.data, null, 2)}`
+          };
+        }
+      } else if (query.toLowerCase().startsWith('/guardian-data ')) {
+        const address = query.split(' ')[1];
+        if (address) {
+          const response = await fetch(`https://gateway.multiversx.com/address/${address}/guardian-data`);
+          const data = await response.json();
+          responseMessage = {
+            type: 'system',
+            content: `Guardian Data:\n${JSON.stringify(data.data, null, 2)}`
+          };
+        }
+      } else if (query.toLowerCase().startsWith('/nonce ')) {
+        const address = query.split(' ')[1];
+        if (address) {
+          const response = await fetch(`https://gateway.multiversx.com/address/${address}/nonce`);
+          const data = await response.json();
+          responseMessage = {
+            type: 'system',
+            content: `Address Nonce: ${data.data.nonce}`
+          };
+        }
+      } else if (query.toLowerCase().startsWith('/balance ')) {
+        const address = query.split(' ')[1];
+        if (address) {
           const response = await fetch(`https://gateway.multiversx.com/address/${address}/balance`);
           const data = await response.json();
           
           if (data.data?.balance) {
-            // Convert from smallest unit (10^18) to EGLD
             const balanceInEGLD = (Number(data.data.balance) / 10**18).toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2
             });
-            
             responseMessage = {
               type: 'system',
-              content: `Balance for address ${address}:\n${balanceInEGLD} EGLD`
-            };
-          } else {
-            responseMessage = {
-              type: 'system',
-              content: 'Error: Could not fetch balance. Please verify the address.'
+              content: `Balance: ${balanceInEGLD} EGLD`
             };
           }
-        } catch (error) {
+        }
+      } else if (query.toLowerCase().startsWith('/username ')) {
+        const address = query.split(' ')[1];
+        if (address) {
+          const response = await fetch(`https://gateway.multiversx.com/address/${address}/username`);
+          const data = await response.json();
           responseMessage = {
             type: 'system',
-            content: 'Error: Failed to fetch balance. Please try again later.'
+            content: data.data.username ? 
+              `Username: ${atob(data.data.username)}` : 
+              'No username found for this address'
           };
         }
-      }
-    } else if (query.toLowerCase() === '/help addresses') {
-      responseMessage = {
-        type: 'system',
-        content: `I can help you with the following Address operations:
+      } else if (query.toLowerCase().startsWith('/storage ')) {
+        const parts = query.split(' ');
+        const key = parts[1];
+        const address = parts[2];
+        if (key && address) {
+          const response = await fetch(`https://gateway.multiversx.com/address/${address}/key/${key}`);
+          const data = await response.json();
+          responseMessage = {
+            type: 'system',
+            content: `Storage Value:\n${JSON.stringify(data.data, null, 2)}`
+          };
+        }
+      } else if (query.toLowerCase() === '/help addresses') {
+        responseMessage = {
+          type: 'system',
+          content: `I can help you with the following Address operations:
 
 • Get Address Details     →  /details <address>
 • Get Guardian Data      →  /guardian-data <address>
@@ -96,50 +135,35 @@ const MultiversHome = () => {
 • Get Storage Value     →  /storage <key> <address>
 
 Example: /balance erd1vtlpm6sxxvmgt43ldsrpswjrfcsudmradylpxn9jkp66ra3rkz4qruzvfw`
-      };
-    } else if (query.toLowerCase() === '/help transactions') {
-      responseMessage = {
-        type: 'system',
-        content: `I can help you with the following Transaction operations:
+        };
+      } else if (query.toLowerCase() === '/help transactions') {
+        responseMessage = {
+          type: 'system',
+          content: `I can help you with the following Transaction operations:
 • Send Transaction
 • Send Multiple Transactions
 • Simulate Transaction
 • Get Transaction Status
 • Get Transaction Details
 • Query Transaction Pool`
-      };
-    } else if (query.toLowerCase() === '/help blocks') {
-      responseMessage = {
-        type: 'system',
-        content: `I can help you with the following Block operations:
+        };
+      } else if (query.toLowerCase() === '/help blocks') {
+        responseMessage = {
+          type: 'system',
+          content: `I can help you with the following Block operations:
 • Get Hyperblock by Nonce
 • Get Hyperblock by Hash
 • Get Block by Nonce
 • Get Block by Hash`
-      };
-    } else if (query.toLowerCase().startsWith('/details ')) {
-      const address = query.split(' ')[1];
-      if (address) {
-        try {
-          const response = await fetch(`https://gateway.multiversx.com/address/${address}`);
-          const data = await response.json();
-          responseMessage = {
-            type: 'system',
-            content: `Address Details for ${address}:\n${JSON.stringify(data.data, null, 2)}`
-          };
-        } catch (error) {
-          responseMessage = {
-            type: 'system',
-            content: 'Error: Failed to fetch address details. Please try again later.'
-          };
-        }
+        };
       }
-    } else if (query.toLowerCase().startsWith('/guardian-data ')) {
-      // Add similar handlers for other commands
-      // ... existing code continues
+    } catch (error) {
+      responseMessage = {
+        type: 'system',
+        content: `Error: ${error.message}. Please try again later.`
+      };
     }
 
-    // Add response message if exists
     if (responseMessage) {
       setMessages(prev => [...prev, responseMessage]);
     }

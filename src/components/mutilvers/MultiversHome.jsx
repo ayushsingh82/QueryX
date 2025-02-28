@@ -140,12 +140,17 @@ Example: /balance erd1vtlpm6sxxvmgt43ldsrpswjrfcsudmradylpxn9jkp66ra3rkz4qruzvfw
         responseMessage = {
           type: 'system',
           content: `I can help you with the following Transaction operations:
-• Send Transaction
-• Send Multiple Transactions
-• Simulate Transaction
-• Get Transaction Status
-• Get Transaction Details
-• Query Transaction Pool`
+
+• Get Transaction Status    →  /tx-status <hash>
+• Get Transaction Details   →  /tx <hash>
+• Get Transaction Pool     →  /tx-pool [sender_address]
+• Send Transaction         →  /send-tx <tx_data>
+• Send Multiple Txns       →  /send-multiple <tx_data_array>
+• Simulate Transaction     →  /simulate-tx <tx_data>
+
+Example: /tx fcd232fea3d7b3dd039c1153a6c93ecdce72506e222158bf94ead87883054853
+
+Note: For send and simulate operations, transaction data should be in JSON format.`
         };
       } else if (query.toLowerCase() === '/help blocks') {
         responseMessage = {
@@ -232,6 +237,119 @@ Note: For block operations, you can add shard number (optional):
             responseMessage = {
               type: 'system',
               content: 'Error: Failed to fetch block. Please try again later.'
+            };
+          }
+        }
+      } else if (query.toLowerCase().startsWith('/tx-status ')) {
+        const hash = query.split(' ')[1];
+        if (hash) {
+          try {
+            const response = await fetch(`https://gateway.multiversx.com/transaction/${hash}/status`);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Transaction Status:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch transaction status.'
+            };
+          }
+        }
+      } else if (query.toLowerCase().startsWith('/tx ')) {
+        const hash = query.split(' ')[1];
+        if (hash) {
+          try {
+            const response = await fetch(`https://gateway.multiversx.com/transaction/${hash}`);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Transaction Details:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch transaction details.'
+            };
+          }
+        } else if (query.toLowerCase().startsWith('/tx-pool')) {
+          const sender = query.split(' ')[1]; // optional sender address
+          try {
+            const url = `https://gateway.multiversx.com/transaction/pool${sender ? `?by-sender=${sender}` : ''}`;
+            const response = await fetch(url);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Transaction Pool${sender ? ` for ${sender}` : ''}:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch transaction pool.'
+            };
+          }
+        } else if (query.toLowerCase().startsWith('/send-tx ')) {
+          try {
+            const txData = JSON.parse(query.substring(9)); // Remove '/send-tx ' and parse JSON
+            const response = await fetch('https://gateway.multiversx.com/transaction/send', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(txData)
+            });
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Transaction Sent:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to send transaction. Please check your transaction data format.'
+            };
+          }
+        } else if (query.toLowerCase().startsWith('/send-multiple ')) {
+          try {
+            const txDataArray = JSON.parse(query.substring(14)); // Remove '/send-multiple ' and parse JSON
+            const response = await fetch('https://gateway.multiversx.com/transaction/send-multiple', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(txDataArray)
+            });
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Multiple Transactions Sent:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to send transactions. Please check your transaction data format.'
+            };
+          }
+        } else if (query.toLowerCase().startsWith('/simulate-tx ')) {
+          try {
+            const txData = JSON.parse(query.substring(12)); // Remove '/simulate-tx ' and parse JSON
+            const response = await fetch('https://gateway.multiversx.com/transaction/simulate', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(txData)
+            });
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Transaction Simulation:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to simulate transaction. Please check your transaction data format.'
             };
           }
         }

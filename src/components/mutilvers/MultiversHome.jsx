@@ -151,11 +151,90 @@ Example: /balance erd1vtlpm6sxxvmgt43ldsrpswjrfcsudmradylpxn9jkp66ra3rkz4qruzvfw
         responseMessage = {
           type: 'system',
           content: `I can help you with the following Block operations:
-• Get Hyperblock by Nonce
-• Get Hyperblock by Hash
-• Get Block by Nonce
-• Get Block by Hash`
+
+• Get Hyperblock by Nonce  →  /hyperblock <nonce>
+• Get Hyperblock by Hash   →  /hyperblock-hash <hash>
+• Get Block by Nonce      →  /block <nonce>
+• Get Block by Hash       →  /block-hash <hash>
+
+Example: /block 56959
+
+Note: For block operations, you can add shard number (optional):
+/block 56959 1  (for shard 1)
+/block-hash <hash> 2  (for shard 2)`
         };
+      } else if (query.toLowerCase().startsWith('/hyperblock ')) {
+        const nonce = query.split(' ')[1];
+        if (nonce) {
+          try {
+            const response = await fetch(`https://gateway.multiversx.com/hyperblock/by-nonce/${nonce}`);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Hyperblock by Nonce:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch hyperblock. Please try again later.'
+            };
+          }
+        }
+      } else if (query.toLowerCase().startsWith('/hyperblock-hash ')) {
+        const hash = query.split(' ')[1];
+        if (hash) {
+          try {
+            const response = await fetch(`https://gateway.multiversx.com/hyperblock/by-hash/${hash}`);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Hyperblock by Hash:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch hyperblock. Please try again later.'
+            };
+          }
+        }
+      } else if (query.toLowerCase().startsWith('/block ')) {
+        const parts = query.split(' ');
+        const nonce = parts[1];
+        const shard = parts[2]; // optional
+        if (nonce) {
+          try {
+            const response = await fetch(`https://gateway.multiversx.com/block${shard ? `/${shard}` : ''}/by-nonce/${nonce}`);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Block by Nonce${shard ? ` (Shard ${shard})` : ''}:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch block. Please try again later.'
+            };
+          }
+        }
+      } else if (query.toLowerCase().startsWith('/block-hash ')) {
+        const parts = query.split(' ');
+        const hash = parts[1];
+        const shard = parts[2]; // optional
+        if (hash) {
+          try {
+            const response = await fetch(`https://gateway.multiversx.com/block${shard ? `/${shard}` : ''}/by-hash/${hash}`);
+            const data = await response.json();
+            responseMessage = {
+              type: 'system',
+              content: `Block by Hash${shard ? ` (Shard ${shard})` : ''}:\n${JSON.stringify(data.data, null, 2)}`
+            };
+          } catch (error) {
+            responseMessage = {
+              type: 'system',
+              content: 'Error: Failed to fetch block. Please try again later.'
+            };
+          }
+        }
       }
     } catch (error) {
       responseMessage = {

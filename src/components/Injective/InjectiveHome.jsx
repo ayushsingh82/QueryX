@@ -67,9 +67,9 @@ const InjectiveHome = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-black/40 border border-purple-500/10 rounded-2xl p-6 h-[600px] flex flex-col
-            shadow-[0_0_15px_rgba(168,85,247,0.15)] backdrop-blur-sm relative animated-border-box injective-border
-            before:rounded-2xl overflow-hidden"
+          className="bg-black/40 border-2 border-purple-500/30 rounded-2xl p-6 h-[600px] flex flex-col
+            shadow-[inset_0_0_30px_rgba(168,85,247,0.1),_0_0_20px_rgba(168,85,247,0.15)] 
+            backdrop-blur-sm relative overflow-hidden"
         >
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto mb-4 space-y-4">

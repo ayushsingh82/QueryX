@@ -392,15 +392,32 @@ Note: For block operations, you can add shard number (optional):
       {/* Header */}
       <div className="max-w-6xl mx-auto relative">
         <div className="flex items-center gap-4 mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Multivers Query Tool
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 
+            bg-clip-text text-transparent flex items-center gap-2">
+            Multivers
+            <img 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
+              alt="MultiversX Logo"
+              className="w-12 h-12 object-contain rounded-full inline-block"
+            />
+            Query Tool
           </h1>
-          <img 
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
-            alt="MultiversX Logo"
-            className="w-12 h-12 object-contain filter brightness-200"
-          />
         </div>
+
+        {/* Powered by Box */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full 
+            border border-blue-500/20 bg-blue-500/5 text-blue-400 text-sm">
+            <span>Powered by AI & </span>
+            <img 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
+              alt="MultiversX Logo"
+              className="w-4 h-4 object-contain rounded-full"
+            />
+            <span>MultiversX</span>
+          </div>
+        </div>
+
         <p className="text-gray-400 text-xl mb-8 max-w-2xl">
           Seamlessly query and analyze MultiversX blockchain data using natural language
         </p>

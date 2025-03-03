@@ -1,33 +1,19 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const FloatingImage = ({ src, className }) => (
-  <motion.img
-    src={src}
-    className={`absolute pointer-events-none ${className}`}
-    animate={{
-      y: [0, -20, 0],
-      rotate: [0, -5, 5, 0],
-    }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }}
-    alt=""
-  />
-);
-
 const Home = () => {
-  const [hoveredBox, setHoveredBox] = useState(null);
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-8 relative overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 via-transparent to-transparent" />
-      
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 right-[15%] w-[500px] h-[500px] rounded-full 
+          bg-gradient-radial from-blue-500/10 via-transparent to-transparent blur-3xl" />
+        <div className="absolute bottom-1/4 left-[15%] w-[500px] h-[500px] rounded-full 
+          bg-gradient-radial from-cyan-500/10 via-transparent to-transparent blur-3xl" />
+      </div>
+
       {/* Logo */}
       <motion.div 
         className="absolute top-8 left-8 z-20 flex items-center gap-3"
@@ -35,151 +21,200 @@ const Home = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
-          <span className="text-white font-bold text-xl">A</span>
-        </div>
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
-          AI-Query
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 
+          bg-clip-text text-transparent flex items-center gap-2">
+          Multivers
+          <img 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
+            alt="MultiversX Logo"
+            className="w-8 h-8 object-contain rounded-full inline-block"
+          />
+          Query Tool
         </h2>
       </motion.div>
 
-      {/* Floating Elements with Blur */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute top-1/4 right-[15%] w-64 h-64 rounded-full bg-blue-500/10 blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.2, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 left-[15%] w-72 h-72 rounded-full bg-purple-500/10 blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.3, 0.2] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-      </div>
-
-      {/* Header Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-20 relative z-10 max-w-4xl mx-auto px-4"
-      >
-        <motion.div 
-          className="inline-block mb-6 p-2 rounded-full bg-white/5 border border-white/10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          <span className="text-sm text-gray-400 px-4">Powered by AI & Blockchain</span>
-        </motion.div>
-        
-        <motion.h1 
-          className="text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 bg-clip-text text-transparent leading-tight"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          AI-Powered Query Tool
-        </motion.h1>
-        
-        <motion.p 
-          className="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          Your intelligent gateway to seamless blockchain data analysis across 
-          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Injective </span>
-          & 
-          <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> MultiversX</span>
-        </motion.p>
-      </motion.div>
-
-      {/* Boxes Container */}
-      <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl mx-auto px-4 relative z-10">
-        {/* Injective Box */}
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
         <motion.div
-          className={`flex-1 group relative rounded-2xl p-8 backdrop-blur-sm transition-all duration-500 ease-in-out
-            ${hoveredBox === 'injective' 
-              ? 'border-2 border-purple-500/50 bg-purple-500/10' 
-              : 'border border-purple-500/20 bg-black/20'}`}
-          whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6 }}
-          onHoverStart={() => setHoveredBox('injective')}
-          onHoverEnd={() => setHoveredBox(null)}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
         >
-          <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
-                <img 
-                  src="https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/x28vfuw4odw35wcxdyrg"
-                  alt="Injective Logo"
-                  className="w-8 h-8 object-contain filter brightness-200"
-                />
-              </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Injective
-              </h2>
+          <div className="flex justify-center">
+            <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-blue-500/20 
+              bg-blue-500/5 text-blue-400 text-xs mb-6">
+              <span>Powered by AI & </span>
+              <img 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
+                alt="MultiversX Logo"
+                className="w-3.5 h-3.5 object-contain rounded-full"
+              />
+              <span>MultiversX</span>
             </div>
-            <p className="text-gray-400 text-lg mb-8 min-h-[80px]">
-              Explore the decentralized derivatives trading protocol with natural language queries
-            </p>
-            <motion.button 
-              className="px-6 py-3 rounded-xl border-2 border-purple-500/50 text-purple-400 font-semibold
-                transform transition-all duration-200 hover:bg-purple-500/10 group-hover:border-purple-500/70"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/injective')}
-            >
-              Get Started →
-            </motion.button>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              The Intelligent MultiversX
+            </span>
+            <br />
+            <span className="text-white">
+              Blockchain Query Tool
+            </span>
+          </h1>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
+            Query and analyze MultiversX blockchain data using natural language. Get instant access to 
+            transactions, addresses, and blocks with AI-powered search capabilities.
+          </p>
+          
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/multiverse')}
+            className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 
+              text-white font-semibold text-lg shadow-lg hover:shadow-blue-500/20 
+              transition-all duration-300"
+          >
+            Start Querying →
+          </motion.button>
+        </motion.div>
+
+        {/* Stats with Features Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <h2 className="text-3xl font-bold text-white mb-8">Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <StatsCard
+              title="Transaction Cost"
+              value="~$0.002"
+              description="per transaction"
+            />
+            <StatsCard
+              title="Network Activity"
+              value="434M+"
+              description="total transactions"
+            />
+            <StatsCard
+              title="Security"
+              value="3,200+"
+              description="validator nodes"
+            />
           </div>
         </motion.div>
 
-        {/* Multiverse Box */}
+        {/* Features/Commands */}
         <motion.div
-          className={`flex-1 group relative rounded-2xl p-8 backdrop-blur-sm transition-all duration-500 ease-in-out
-            ${hoveredBox === 'multiverse' 
-              ? 'border-2 border-blue-500/50 bg-blue-500/10' 
-              : 'border border-blue-500/20 bg-black/20'}`}
-          whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8 }}
-          onHoverStart={() => setHoveredBox('multiverse')}
-          onHoverEnd={() => setHoveredBox(null)}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
         >
-          <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                <img 
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
-                  alt="MultiversX Logo"
-                  className="w-8 h-8 object-contain filter brightness-200"
-                />
-              </div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                MultiversX
-              </h2>
-            </div>
-            <p className="text-gray-400 text-lg mb-8 min-h-[80px]">
-              Query and analyze blockchain data with AI-powered natural language processing
-            </p>
-            <motion.button 
-              className="px-6 py-3 rounded-xl border-2 border-blue-500/50 text-blue-400 font-semibold
-                transform transition-all duration-200 hover:bg-blue-500/10 group-hover:border-blue-500/70"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/multiverse')}
-            >
-              Explore →
-            </motion.button>
-          </div>
+          <OverviewCard
+            title="Address Operations"
+            description="Query address details, balance, nonce, username, and storage data using simple commands."
+            example="/balance <address>"
+            count="6 commands"
+          />
+          <OverviewCard
+            title="Transaction Operations"
+            description="Send, simulate, and query transaction status, details, and pool information."
+            example="/tx <hash>"
+            count="6 commands"
+          />
+          <OverviewCard
+            title="Block Operations"
+            description="Access hyperblock and block data by nonce or hash across different shards."
+            example="/block <nonce>"
+            count="4 commands"
+          />
         </motion.div>
+
+        {/* Footer */}
+        <footer className="border-t border-blue-500/20 pt-8 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="text-white font-semibold mb-4">About</h3>
+              <p className="text-gray-400 text-sm">
+                MultiversX Query Tool provides an intuitive interface to interact with 
+                the MultiversX blockchain using natural language and simple commands.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="https://multiversx.com" target="_blank" rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400 text-sm">MultiversX Website</a>
+                </li>
+                <li>
+                  <a href="https://docs.multiversx.com" target="_blank" rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400 text-sm">Documentation</a>
+                </li>
+                <li>
+                  <a href="https://github.com/multiversx" target="_blank" rel="noopener noreferrer" 
+                    className="text-gray-400 hover:text-blue-400 text-sm">GitHub</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-white font-semibold mb-4">Connect</h3>
+              <div className="flex gap-4">
+                <a href="https://twitter.com/MultiversX" target="_blank" rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-blue-400">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                  </svg>
+                </a>
+                <a href="https://t.me/MultiversX" target="_blank" rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-blue-400">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12c0 6.627-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0s12 5.373 12 12zm-12.43 8.81c-.31 0-.256-.12-.363-.41l-.91-2.99 7.03-4.18"/>
+                    <path d="M19.57 5.93c.17-.14.33.03.21.17l-2.79 13.2c-.2.9-.76 1.12-1.54.7l-4.28-3.16-2.06 1.98c-.23.23-.42.42-.86.42l.31-4.33 7.89-7.13c.34-.31-.07-.48-.53-.19l-9.74 6.13-4.19-1.31c-.91-.28-.93-.91.19-1.35l16.41-6.32c.75-.28 1.41.17 1.19 1.19z"/>
+                  </svg>
+                </a>
+                <a href="https://discord.gg/MultiversX" target="_blank" rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-blue-400">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="text-center text-gray-400 text-sm pb-8">
+            © 2024 MultiversX Query Tool. All rights reserved.
+          </div>
+        </footer>
       </div>
     </div>
   );
 };
+
+const StatsCard = ({ title, value, description }) => (
+  <div className="p-6 rounded-2xl border border-blue-500/20 bg-blue-500/5 backdrop-blur-sm">
+    <h3 className="text-gray-400 text-sm mb-2">{title}</h3>
+    <div className="text-4xl font-bold text-white mb-1">{value}</div>
+    <p className="text-gray-500 text-sm">{description}</p>
+  </div>
+);
+
+const OverviewCard = ({ title, description, example, count }) => (
+  <div className="p-6 rounded-2xl border border-blue-500/20 bg-blue-500/5 backdrop-blur-sm
+    hover:border-blue-500/40 transition-colors group">
+    <div className="flex justify-between items-start mb-4">
+      <h3 className="text-xl font-semibold text-white">{title}</h3>
+      <span className="text-xs text-blue-400/70 bg-blue-500/10 px-2 py-1 rounded-full">
+        {count}
+      </span>
+    </div>
+    <p className="text-gray-400 text-sm mb-4">{description}</p>
+    <div className="text-xs text-gray-500 border-t border-blue-500/20 pt-4">
+      Example: <code className="text-blue-400/70 font-mono">{example}</code>
+    </div>
+  </div>
+);
 
 export default Home;

@@ -1,11 +1,35 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '../common/Header';
+import foxsyData from './Foxsy.json';
 
 const Foxsy = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const findBestMatch = (query) => {
+    query = query.toLowerCase().trim();
+    
+    // Remove punctuation and normalize question
+    const normalizedQuery = query.replace(/[?.!]/g, '').trim();
+    
+    // Try to find exact match first (ignoring case and punctuation)
+    const exactMatch = foxsyData.questions.find(item => 
+      item.question.toLowerCase().replace(/[?.!]/g, '').trim() === normalizedQuery
+    );
+    
+    if (exactMatch) {
+      return exactMatch.answer;
+    }
+    
+    // If no exact match found, return helpful message with available questions
+    const availableQuestions = foxsyData.questions
+      .map(item => `- ${item.question}`)
+      .join('\n');
+    
+    return "I'm not sure about that. Please try one of these questions:\n" + availableQuestions;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,26 +41,12 @@ const Foxsy = () => {
     setInput('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch('http://localhost:3000/api/foxsy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: input }),
-      });
-
-      const data = await response.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
-    } catch (error) {
-      console.error('Error:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.'
-      }]);
-    }
-
-    setIsLoading(false);
+    // Simulate API delay
+    setTimeout(() => {
+      const response = findBestMatch(input);
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
@@ -63,7 +73,7 @@ const Foxsy = () => {
         {/* Description */}
         <div className="text-center mb-8">
           <p className="text-gray-400 text-xl mx-auto max-w-2xl">
-            Seamlessly query and analyze Foxsy protocol data using natural language
+            Seamlessly query and analyze Foxsy NFT marketplace using natural language
           </p>
         </div>
 
@@ -75,7 +85,7 @@ const Foxsy = () => {
             scrollbar-thumb-pink-500/20 scrollbar-track-transparent pr-4">
             {messages.length === 0 && (
               <div className="text-center text-gray-500 mt-8">
-                Ask me anything about Foxsy protocol...
+                Ask me anything about Foxsy NFT marketplace...
               </div>
             )}
             {messages.map((message, index) => (

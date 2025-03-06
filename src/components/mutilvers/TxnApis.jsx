@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Header from '../common/Header';
 
 const EXAMPLE_TXN = {
   nonce: 42,
@@ -58,6 +59,7 @@ const TxnApis = () => {
 
   return (
     <div className="min-h-screen bg-black p-8">
+      <Header />
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-8">
           MultiversX Transaction APIs

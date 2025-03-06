@@ -67,16 +67,28 @@ const Home = () => {
             transactions, addresses, and blocks with AI-powered search capabilities.
           </p>
           
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/multiverse')}
-            className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 
-              text-white font-semibold text-lg shadow-lg hover:shadow-blue-500/20 
-              transition-all duration-300"
-          >
-            Start Querying →
-          </motion.button>
+          <div className="flex items-center justify-center gap-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/multiverse')}
+              className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 
+                text-white font-semibold text-lg shadow-lg hover:shadow-blue-500/20 
+                transition-all duration-300"
+            >
+              Start Querying →
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/chat')}
+              className="px-8 py-4 rounded-xl border-2 border-blue-500/50 text-blue-400 
+                font-semibold text-lg hover:bg-blue-500/10 transition-all duration-300"
+            >
+              MultiversX AI Assistant
+            </motion.button>
+          </div>
         </motion.div>
 
         {/* Stats with Features Heading */}

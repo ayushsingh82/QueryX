@@ -10,14 +10,10 @@ const Home = () => {
         {/* Brand */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <img 
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
-              alt="MultiversX Logo"
-              className="w-8 h-8 object-contain rounded-full"
-            />
+   
             <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 
               bg-clip-text text-transparent">
-              Query
+              QueryX
             </h2>
           </div>
           <div className="h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
@@ -43,12 +39,18 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              The Intelligent MultiversX
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight space-y-1">
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent 
+              flex items-center justify-center">
+              The Intelligent Multivers
+              <img 
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4k3nbDrC3GEsVjm0wkryqLPtNKhi2qM_KCg&s"
+                alt="MultiversX Logo"
+                className="w-14 h-14 object-contain rounded-full inline-block -ml-2"
+              />
             </span>
-            <br />
-            <span className="text-white">
+            <br className="hidden" />
+            <span className="text-white block text-3xl md:text-5xl">
               Blockchain Query Tool
             </span>
           </h1>

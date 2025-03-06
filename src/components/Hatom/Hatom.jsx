@@ -1,11 +1,26 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '../common/Header';
+import hatomData from './hatom.json';
 
 const Hatom = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const findBestMatch = (query) => {
+    query = query.toLowerCase();
+    
+    // Check each question for a match
+    for (const [question, data] of Object.entries(hatomData.questions)) {
+      if (query.includes(question.toLowerCase())) {
+        return data.response;
+      }
+    }
+    
+    // If no match found, return a default response
+    return "I'm not sure about that. Please try asking about lending, borrowing, APY rates, governance, or other aspects of Hatom Protocol.";
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,26 +32,12 @@ const Hatom = () => {
     setInput('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch('http://localhost:3000/api/hatom', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: input }),
-      });
-
-      const data = await response.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
-    } catch (error) {
-      console.error('Error:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.'
-      }]);
-    }
-
-    setIsLoading(false);
+    // Simulate API delay
+    setTimeout(() => {
+      const response = findBestMatch(input);
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (

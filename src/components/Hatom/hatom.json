@@ -1,0 +1,50 @@
+{
+    "questions": {
+      "what is the contract address of the EGLD Market": {
+        "response": "The contract address of the EGLD Market is erd1qqqqqqqqqqqqqpgq35qkf34a8svu4r2zmfzuztmeltqclapv78ss5jleq3."
+      },
+      "what is the contract address of the SEGLD Market": {
+        "response": "The contract address of the SEGLD Market is erd1qqqqqqqqqqqqqpgqxmn4jlazsjp6gnec95423egatwcdfcjm78ss5q550k."
+      },
+      "what is the contract address of the USDC Market": {
+        "response": "The contract address of the USDC Market is erd1qqqqqqqqqqqqqpgqkrgsvct7hfx7ru30mfzk3uy6pxzxn6jj78ss84aldu."
+      },
+      "what is the contract address of the USDT Market": {
+        "response": "The contract address of the USDT Market is erd1qqqqqqqqqqqqqpgqvxn0cl35r74tlw2a8d794v795jrzfxyf78sstg8pjr."
+      },
+      "what is the controller contract address of Hatom Protocol": {
+        "response": "The controller contract address of Hatom Protocol is erd1qqqqqqqqqqqqqpgqxp28qpnv7rfcmk6qrgxgw5uf2fnp84ar78ssqdk6hr."
+      },
+      "what is Hatom": {
+        "response": "Hatom Protocol is a decentralized lending and borrowing platform built on the MultiversX blockchain. It allows users to lend their assets to earn interest and borrow assets by providing collateral."
+      },
+      "how is Hatom related to MultiversX": {
+        "response": "Hatom Protocol is the first liquidity hub on MultiversX, offering algorithmic lending, liquid staking, stablecoin issuance, and cross-chain bridging to drive DeFi growth within the MultiversX ecosystem."
+      },
+      "how can I lend assets on Hatom Protocol": {
+        "response": "To lend on Hatom Protocol:\n1. Connect your MultiversX wallet\n2. Choose an asset to lend\n3. Deposit your tokens\n4. Start earning interest automatically\n\nSupported assets include: EGLD, USDC, MEX, and WEGLD."
+      },
+      "how can I borrow assets on Hatom Protocol": {
+        "response": "To borrow from Hatom Protocol:\n1. Deposit collateral assets\n2. Choose the asset you want to borrow\n3. Select the amount (based on your collateral)\n4. Confirm the transaction\n\nMaintain a healthy collateral ratio to avoid liquidation."
+      },
+      "what are the current APY rates for lending on Hatom": {
+        "response": "Current APY rates for lending:\n- EGLD: 3.5%\n- USDC: 8.2%\n- MEX: 12.4%"
+      },
+      "what are the current APY rates for borrowing on Hatom": {
+        "response": "Current APY rates for borrowing:\n- EGLD: 5.2%\n- USDC: 10.8%\n- MEX: 15.6%"
+      },
+      "what happens if my collateral ratio falls below the threshold": {
+        "response": "If your collateral ratio falls below the required threshold, your position may be liquidated. The minimum collateral ratio is 150%, and the warning threshold is 165%."
+      },
+      "what is the liquidation penalty on Hatom Protocol": {
+        "response": "The liquidation penalty on Hatom Protocol is 10%. To avoid liquidation, maintain a collateral ratio above the required minimum."
+      },
+      "how does governance work in Hatom Protocol": {
+        "response": "Hatom governance allows token holders to participate in decision-making:\n1. Stake HTM tokens to get voting power\n2. Browse active proposals in the Governance section\n3. Cast votes on proposals\n4. Monitor proposal status\n\nVoting power is determined by your staked HTM tokens at snapshot time."
+      },
+      "how does Hatom maintain the price stability of USH": {
+        "response": "Hatom maintains USH price stability at $1 through:\n- Arbitrage mechanisms\n- Controlled minting and burning\n- Collateralization requirements\n- Redemption mechanisms\n\nThis ensures USH remains pegged to $1 regardless of market conditions."
+      }
+    }
+  }
+  

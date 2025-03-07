@@ -11,15 +11,15 @@ const Hatom = () => {
   const findBestMatch = (query) => {
     query = query.toLowerCase();
     
-    // Check each question for a match
-    for (const [question, data] of Object.entries(hatomData.questions)) {
-      if (query.includes(question.toLowerCase())) {
-        return data.response;
+    // Direct match
+    for (const key of Object.keys(hatomData.queries)) {
+      if (query.includes(key)) {
+        return hatomData.queries[key].response;
       }
     }
     
-    // If no match found, return a default response
-    return "I'm not sure about that. Please try asking about lending, borrowing, APY rates, governance, or other aspects of Hatom Protocol.";
+    // If no match found, return default response
+    return hatomData.default.response;
   };
 
   const handleSubmit = async (e) => {

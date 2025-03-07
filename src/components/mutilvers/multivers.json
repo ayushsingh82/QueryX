@@ -1,0 +1,25 @@
+{
+    "faq": [
+      {
+        "question": "What is MultiversX?",
+        "answer": "MultiversX is a high-performance, sharded smart contract blockchain with Proof of Stake (SPoS) consensus, designed for the Web3 era with the capacity to serve Web2 needs."
+      },
+      {
+        "question": "How many transactions per second (TPS) can MultiversX achieve?",
+        "answer": "At the moment of writing, MultiversX achieves over 30,000 TPS with adaptive scalability, offering fast and low-cost transactions."
+      },
+      {
+        "question": "What is EGLD?",
+        "answer": "EGLD is the native cryptocurrency of MultiversX, functioning as digital, global money and serving as the primary asset within the MultiversX ecosystem."
+      },
+      {
+        "question": "What are the key features of EGLD?",
+        "answer": "EGLD has several key features: Ownership (full control over your funds), Security (protected by cryptography under your own account), Decentralization (no central authority controls it), and Accessibility (usable with just an internet connection and a wallet)."
+      },
+      {
+        "question": "MultiversX docs link?",
+        "answer": "You can find the official documentation at https://docs.multiversx.com/learn/getting-started."
+      }
+    ]
+  }
+  

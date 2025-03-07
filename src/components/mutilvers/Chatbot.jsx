@@ -1,11 +1,41 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '../common/Header';
+import multiversData from './multivers.json';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const findBestMatch = (query) => {
+    query = query.toLowerCase().trim();
+    
+    // Try to find exact match first
+    let bestMatch = multiversData.faq.find(item => 
+      item.question.toLowerCase() === query
+    );
+
+    // If no exact match, try partial match
+    if (!bestMatch) {
+      bestMatch = multiversData.faq.find(item => 
+        query.includes(item.question.toLowerCase())
+      );
+    }
+
+    // If still no match, try keyword matching
+    if (!bestMatch) {
+      bestMatch = multiversData.faq.find(item => {
+        const keywords = item.question.toLowerCase().split(' ');
+        return keywords.some(keyword => 
+          keyword.length > 3 && query.includes(keyword)
+        );
+      });
+    }
+    
+    return bestMatch ? bestMatch.answer : 
+      "I can help you with information about MultiversX blockchain. Try asking questions like:\n- What is MultiversX?\n- What is EGLD?\n- What are the key features of EGLD?\n- How many TPS can MultiversX achieve?\n- Where can I find MultiversX docs?";
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,28 +47,12 @@ const Chatbot = () => {
     setInput('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch('http://localhost:3000/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: input }),
-      });
-
-      const data = await response.json();
-      
-      // Add AI response
-      setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
-    } catch (error) {
-      console.error('Error:', error);
-      setMessages(prev => [...prev, {
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.'
-      }]);
-    }
-
-    setIsLoading(false);
+    // Simulate API delay
+    setTimeout(() => {
+      const response = findBestMatch(input);
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (

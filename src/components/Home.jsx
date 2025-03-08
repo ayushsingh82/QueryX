@@ -56,48 +56,111 @@ const Home = () => {
           </h1>
         </motion.div>
 
-        {/* Action Buttons - 2x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-16">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/multiverse')}
-            className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 
-              text-white font-semibold text-lg shadow-lg hover:shadow-blue-500/20 
-              transition-all duration-300"
-          >
-            Start Querying →
-          </motion.button>
+        {/* Enhanced Action Buttons - 2x2 Grid with Icons and Better Styling */}
+        <div className="max-w-3xl mx-auto mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Main Query Button */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/multiverse')}
+              className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 p-0.5 shadow-lg cursor-pointer group"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.1),transparent_50%)]"></div>
+              <div className="relative bg-black/20 backdrop-blur-sm rounded-xl p-6 h-full">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="bg-white/10 p-3 rounded-lg">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                  </div>
+                  <div className="bg-blue-500/20 px-3 py-1 rounded-full">
+                    <span className="text-xs font-semibold text-blue-300">Featured</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Start Querying</h3>
+                <p className="text-blue-100/70 mb-4">Access the blockchain with natural language queries</p>
+                <div className="flex items-center mt-auto">
+                  <span className="text-white font-medium">Begin now</span>
+                  <svg className="w-5 h-5 ml-2 text-white transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/chat')}
-            className="px-8 py-4 rounded-xl border-2 border-blue-500/50 text-blue-400 
-              font-semibold text-lg hover:bg-blue-500/10 transition-all duration-300"
-          >
-            MultiversX AI Assistant
-          </motion.button>
+            {/* MultiversX AI Assistant */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/chat')}
+              className="rounded-2xl border-2 border-blue-500/30 bg-gradient-to-br from-blue-900/10 to-blue-500/5 p-6 cursor-pointer group"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="bg-blue-500/10 p-3 rounded-lg">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-blue-400 mb-2">MultiversX AI Assistant</h3>
+              <p className="text-gray-400 mb-4">Get blockchain guidance and smart contract insights</p>
+              <div className="flex items-center mt-auto">
+                <span className="text-blue-400 font-medium">Chat now</span>
+                <svg className="w-5 h-5 ml-2 text-blue-400 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </div>
+            </motion.div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/hatom')}
-            className="px-8 py-4 rounded-xl border-2 border-purple-500/50 text-purple-400 
-              font-semibold text-lg hover:bg-purple-500/10 transition-all duration-300"
-          >
-            Hatom AI
-          </motion.button>
+            {/* Hatom AI */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/hatom')}
+              className="rounded-2xl border-2 border-purple-500/30 bg-gradient-to-br from-purple-900/10 to-purple-500/5 p-6 cursor-pointer group"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="bg-purple-500/10 p-3 rounded-lg">
+                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-purple-400 mb-2">Hatom AI</h3>
+              <p className="text-gray-400 mb-4">Analyze DeFi protocols and lending positions</p>
+              <div className="flex items-center mt-auto">
+                <span className="text-purple-400 font-medium">Explore</span>
+                <svg className="w-5 h-5 ml-2 text-purple-400 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </div>
+            </motion.div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/foxsy')}
-            className="px-8 py-4 rounded-xl border-2 border-pink-500/50 text-pink-400 
-              font-semibold text-lg hover:bg-pink-500/10 transition-all duration-300"
-          >
-            Foxsy AI
-          </motion.button>
+            {/* Foxsy AI */}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/foxsy')}
+              className="rounded-2xl border-2 border-pink-500/30 bg-gradient-to-br from-pink-900/10 to-pink-500/5 p-6 cursor-pointer group"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="bg-pink-500/10 p-3 rounded-lg">
+                  <svg className="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-pink-400 mb-2">Foxsy AI</h3>
+              <p className="text-gray-400 mb-4">NFT market insights and collection analysis</p>
+              <div className="flex items-center mt-auto">
+                <span className="text-pink-400 font-medium">Discover</span>
+                <svg className="w-5 h-5 ml-2 text-pink-400 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Footer */}

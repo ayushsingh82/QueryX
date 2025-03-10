@@ -9,17 +9,50 @@ const Hatom = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const findBestMatch = (query) => {
-    query = query.toLowerCase();
+    query = query.toLowerCase().trim();
     
-    // Direct match
-    for (const key of Object.keys(hatomData.queries)) {
-      if (query.includes(key)) {
-        return hatomData.queries[key].response;
-      }
+    // Remove punctuation and normalize question
+    const normalizedQuery = query.replace(/[?.!]/g, '').trim();
+    
+    // Get questions from the correct structure
+    const questions = Object.entries(hatomData.questions);
+    
+    // Try exact match first
+    const exactMatch = questions.find(([key]) => 
+      key.toLowerCase().replace(/[?.!]/g, '').trim() === normalizedQuery
+    );
+    
+    if (exactMatch) {
+      return exactMatch[1].response;
     }
     
-    // If no match found, return default response
-    return hatomData.default.response;
+    // Try partial match
+    const partialMatch = questions.find(([key]) => 
+      normalizedQuery.includes(key.toLowerCase())
+    );
+    
+    if (partialMatch) {
+      return partialMatch[1].response;
+    }
+    
+    // Try keyword match
+    const keywordMatch = questions.find(([key]) => {
+      const keywords = key.toLowerCase().split(' ');
+      return keywords.some(word => 
+        word.length > 3 && normalizedQuery.includes(word)
+      );
+    });
+    
+    if (keywordMatch) {
+      return keywordMatch[1].response;
+    }
+    
+    // If no match found, return available questions
+    const availableQuestions = questions
+      .map(([key]) => `- ${key}`)
+      .join('\n');
+    
+    return "I can help you with information about Hatom Protocol. Try asking questions like:\n" + availableQuestions;
   };
 
   const handleSubmit = async (e) => {
